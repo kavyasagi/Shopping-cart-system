@@ -1,0 +1,24 @@
+.btn,
+.jumbotron,
+.nav :hover {
+  border-radius: 0px;
+}
+
+body {
+  /* background: #C5D8A4; */
+  /* background-image: url('C:/Users/atisharm/Documents/Work Files/CaseStudy - ONLINE SHOPPING CART SYSTEM/Frontend/frontend/src/NewUI/backgroundImage.jpg'); */
+  /* background-image: url('C:/Users/atisharm/Documents/Work Files/CaseStudy - ONLINE SHOPPING CART SYSTEM/Frontend/frontend/src/NewUI/bailey-zindel-NRQV-hBF10M-unsplash.jpg');
+  /* background-image: url("C:/Users/atisharm/Documents/Work Files/CaseStudy - ONLINE SHOPPING CART SYSTEM/Frontend/frontend/src/NewUI/ales-krivec-4miBe6zg5r0-unsplash.jpg"); */
+  /* background-image: url("C:/Users/atisharm/Documents/Work Files/CaseStudy - ONLINE SHOPPING CART SYSTEM/Frontend/frontend/src/NewUI/andy-hermawan-uFdCDgnoNVI-unsplash.jpg"); */
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: round; */ 
+}
+
+footer {
+  position: relative, fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
