@@ -1,0 +1,30 @@
+server:
+  port: 7003
+
+spring:
+  application:
+    name: cart-service
+  data:
+    mongodb:
+      uri: mongodb+srv://sagikavya:sagi@cluster0.eydch.mongodb.net
+      database: Cart
+
+#eureka:
+#  instance:
+#    hostname: localhost
+
+eureka:
+  client:
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+    hostname: localhost
+
+#keycloak:
+#  realm: realm1
+#  auth-server-url: http://127.0.0.1:8080
+#  resource: springboot-keycloak
+#  public-client: true
+#  bearer-only: true
+#  use-resource-role-mappings : true

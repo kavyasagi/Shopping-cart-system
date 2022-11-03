@@ -1,0 +1,98 @@
+server:
+  port: 9999
+
+eureka:
+  client:
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+         '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+      routes:
+        - id: profile-service
+          uri: lb://profile-service
+          predicates:
+            - Path=/profile/**
+          filters:
+            -name: CircuitBreaker
+            args:
+              name: profile-service
+              fallbackuri: forward:/profileServiceFallBack
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/product/** , /category/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: product-service
+                fallbackuri: forward:/productServiceFallBack
+
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/cart/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: cart-service
+                fallbackuri: forward:/cartServiceFallBack
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: order-service
+                fallbackuri: forward:/orderServiceFallBack
+
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/authenticate
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: auth-service
+                fallbackuri: forward:/authServiceFallBack
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment/** , /paymentStripe/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: payment-service
+                fallbackuri: forward:/paymentServiceFallBack
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
